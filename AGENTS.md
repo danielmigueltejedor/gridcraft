@@ -70,3 +70,13 @@ People trust GridCraft with their numbers; a crash loses their work. **This outr
   GitHub profiles). Never hand-edit `contributors.json`.
 - Maintainers refresh the stats with `python3 ../../craftrules/scripts/contributors.py .` (it also
   re-verifies who wrote each `people.toml` entry; `--check` only verifies).
+
+## Repository-specific deterministic quality contract (2026-10-26)
+
+**Project:** Rust spreadsheet/grid editing workspace.
+
+**Engineering requirements:** Protect formula dependency and recalculation correctness, serialization and import/export stability, locale-independent evaluation.
+
+**Verification commands:** cargo fmt --all -- --check; cargo metadata --locked --no-deps --format-version 1; targeted cargo test.
+
+Do not assert any test passed without actual output. Add tests for changed behavior, malformed input and regressions. Never remove/weaken tests, reduce thresholds, suppress errors, or change CI merely to produce a green result. Require review of `QUALITY_GATES.md`, workflow and contract edits. Make the `quality` check required via branch protection. Native tooling blockers must be reported explicitly; preserve existing agent instructions.
